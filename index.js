@@ -4,57 +4,101 @@ const fs = require('fs')
 const prompt = inquirer.createPromptModule();
 
 
-// // TODO: Create an array of questions for user input
-// inquirer = ["What was your motivation?",  "Why did you build this project?", "What problem does it solve?", "What did you learn?", "What makes your project stand out?"]
 
-  
-// // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
+const writeToFile = (readme) => {
 
-// // TODO: Create a function to initialize app
-// function init() {}
+    fs.writeFileSync('README.md', readme)
 
-// // Function call to initialize app
-// init();
+};
+
+const generateMarkdown = (answers) => {
+    return `
+# ${answers.title}
+## Description
+${answers.motivation}
+## Table of contents
+
+* [Installation](#installation)
+
+* [Usage](#usage)
+
+* [License](#license)
+
+* [Contributing](#contributing)
+
+* [Tests](#test)
+
+* [Questions](#questions)
+
+## Installation
+${answers.installation}
+
+## Usage
+${answers.usage}
+
+## License
+${answers.license}
+
+## Test
+// TODO: ADD TEST
+
+## Questions
+// TODO: ADD QUESTIONS
+
+## Contributing
+${answers.contribution}
+
+## GitHub 
+[${answers.gitHub}](https://github.com/${answers.gitHub})
+`;
+};
 
 
 prompt([
     {
-    
+
         message: 'What his your Your Project Title ?',
-        name: 'Title',
+        name: 'Title', // lowercase is better for props Easier to write
     },
     {
-       
+
         message: 'Why did you build this project? ?',
-        name: 'Motivation',
+        name: 'description',
     },
     {
-       
+
         message: 'What are the steps required to install your project?',
-        name: 'Installation',
+        name: 'installation',
     },
     {
-       
+
         message: 'How to use your application ?',
-        name: 'Usage',
+        name: 'usage',
     },
     {
-       
-        message: 'What is your license ?',
-        name: 'License',
-        choice: ['APACHE 2.0', 'GPL 3.0', 'BSD 3, None']
-    },
-    {
-       
         message: 'Would you like to add any contributer to your project ?',
-        name: 'Contribution',
+        name: 'contributing',
+    },
+    {
+        type: 'list',
+        message: 'What is your license ?',
+        name: 'license',
+        choices: ['APACHE 2.0', 'GPL 3.0', 'BSD 3, None'],
+    }, 
+    {
+
+        message: 'What is your Github name ?',
+        name: 'gitHub',
+
+    },
+    {
+
+        message: 'What test do you have ?',
+        name: 'test',
+
     },
 ])
-.then((answers) => {
-    console.log(answers);
-    // fs.appendFile('generateMarkdown.js', `${ JSON.stringify(response) } \n`, (err) => 
-    // err ? console.log('Oops') : console.log('Thank you'))
-    });
-  
-    
+    .then(generateMarkdown)
+    .then(writeToFile);
+
+    module.exports = writeToFile;
