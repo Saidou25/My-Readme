@@ -5,7 +5,7 @@ const prompt = inquirer.createPromptModule();
 
 const writeToFile = (readme) => {
 
-    fs.writeFileSync('README.md', readme);
+    fs.writeFileSync('./Dist/README.md', readme);
 };
 
 // TODO: Create a function that returns a license badge based on which license is passed in
