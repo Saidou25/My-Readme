@@ -1,21 +1,39 @@
 
 const inquirer = require('inquirer');
-const fs = require('fs')
+const fs = require('fs');
 const prompt = inquirer.createPromptModule();
-
-
 
 const writeToFile = (readme) => {
 
-    fs.writeFileSync('README.md', readme)
-
+    fs.writeFileSync('README.md', readme);
 };
+
+// TODO: Create a function that returns a license badge based on which license is passed in
+// If there is no license, return an empty string
+function renderLicenseBadge(license) {
+    return `![License: MIT](https://img.shields.io/badge/License-${license}-yellow.svg)`;
+
+}
+// TODO: Create a function that returns the license link
+// If there is no license, return an empty string
+function renderLicenseLink(license) {
+    return `(https://opensource.org/licenses/${license})`;
+}
+
+
+function renderLicenseSection(license) {
+    return `[${renderLicenseBadge(license)}](https://opensource.org/licenses/${license})`
+}
 
 const generateMarkdown = (answers) => {
     return `
 # ${answers.title}
+
+${renderLicenseSection(answers.license)}
+
 ## Description
-${answers.motivation}
+${answers.description}
+
 ## Table of contents
 
 * [Installation](#installation)
@@ -37,68 +55,70 @@ ${answers.installation}
 ${answers.usage}
 
 ## License
-${answers.license}
+${renderLicenseLink(answers.license)}
 
 ## Test
-// TODO: ADD TEST
+${answers.test}
 
 ## Questions
-// TODO: ADD QUESTIONS
+${answers.email}
 
 ## Contributing
-${answers.contribution}
+${answers.contributing}
 
 ## GitHub 
-[${answers.gitHub}](https://github.com/${answers.gitHub})
-`;
+${answers.gitHub}: (https://github.com/${answers.gitHub})
+`
 };
-
 
 prompt([
     {
-
+        type: 'input',
         message: 'What his your Your Project Title ?',
-        name: 'Title', // lowercase is better for props Easier to write
+        name: 'title',
     },
     {
-
-        message: 'Why did you build this project? ?',
+        type: 'input',
+        message: 'Please describe your application',
         name: 'description',
     },
     {
-
+        type: 'input',
         message: 'What are the steps required to install your project?',
         name: 'installation',
     },
     {
-
+        type: 'input',
         message: 'How to use your application ?',
         name: 'usage',
-    },
-    {
-        message: 'Would you like to add any contributer to your project ?',
-        name: 'contributing',
     },
     {
         type: 'list',
         message: 'What is your license ?',
         name: 'license',
-        choices: ['APACHE 2.0', 'GPL 3.0', 'BSD 3, None'],
-    }, 
-    {
-
-        message: 'What is your Github name ?',
-        name: 'gitHub',
-
+        choices: ['MIT', 'ISC', 'None'],
     },
     {
-
+        type: 'input',
+        message: 'Would you like to add any contributer to your project ?',
+        name: 'contributing',
+    },
+    {
+        type: 'input',
         message: 'What test do you have ?',
         name: 'test',
-
+    },
+    {
+        type: 'input',
+        message: 'For questions ...?',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'What is your Github name ?',
+        name: 'gitHub',
     },
 ])
     .then(generateMarkdown)
     .then(writeToFile);
 
-    module.exports = writeToFile;
