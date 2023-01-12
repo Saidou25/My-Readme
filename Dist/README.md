@@ -1,11 +1,11 @@
 
-# as
+# My-Readme
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
-asdf
+an application that generate a readme file
 
 ## Table of contents
 
@@ -23,28 +23,28 @@ asdf
 
 ## Installation
 
-fda
+it requires inquirer and node js
 
 ## Usage
 
-asf
+open your Terminal and enter node index.js
 
 ## License
 
-for information on the project license click  [MIT](https://opensource.org/licenses/MIT)
+for information on the project's license click  [MIT](https://opensource.org/licenses/MIT)
 
 ## Test
 
-asdf
+i consol logged all along the making of the app
 
 ## Questions
 
 For questions and concern please contact me.
 
-GitHub: [asdf@github](https://github.com/asdf)
+GitHub: [Sy25@github](https://github.com/Sy25)
 
 
 ## Contributing
 
-asf
+the all world
 

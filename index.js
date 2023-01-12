@@ -59,7 +59,7 @@ ${answers.usage}
 
 ## License
 
-for information on the project license click  [${answers.license}](https://opensource.org/licenses/${answers.license})
+for information on the project's license click  [${answers.license}](https://opensource.org/licenses/${answers.license})
 
 ## Test
 
